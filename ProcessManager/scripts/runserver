@@ -1,0 +1,80 @@
+#!/bin/bash 
+USAGE="USAGE: $0 {start|stop|restart} [-p <port>]"
+SCRIPTDIR=$(cd $(dirname $BASH_SOURCE[0]) && pwd)
+
+cd $SCRIPTDIR
+
+if [ "$#" -lt 1 ] ; then
+	echo $USAGE >&2
+	return 2> /dev/null
+	exit
+fi
+
+# Save 1st arg (start/stop/restart)
+CMD=$1
+shift
+
+JAVA_DEFAULT=$(ls -d /usr/local/jdk1.[56].*[0-9] 2>/dev/null | tail -1)
+if [ -d $JAVA_DEFAULT ] ; then
+	PATH=$JAVA_DEFAULT/bin:$PATH
+fi
+
+if [ -r setjava.sh ] ; then
+	source setjava.sh
+fi
+
+HNAME=$(java -jar OsNameArch.jar hostname)
+BASENAME=$SCRIPTDIR/$HNAME/server
+RUNCMD64="java -d64 -jar $SCRIPTDIR/server.jar $*"
+RUNCMD32="java -d32 -jar $SCRIPTDIR/server.jar $*"
+
+mkdir -p $(dirname $BASENAME)
+case $CMD in
+	start)
+		which coreadm > /dev/null 2>&1
+		if [ $? -eq 0 ] ; then
+			coreadm -p core-%n-%f-%p	
+		fi
+		echo STARTING $RUNCMD64
+		echo '>>>>>>>>>' $(date) >> $BASENAME.out
+		echo '>>>>>>>>>' $(date) > $BASENAME.err
+		$RUNCMD64 >> $BASENAME.out 2>> $BASENAME.err &
+		PID=$!
+		sleep 1
+		ps -p $PID
+		RUNSTATUS=$?
+		if [ "$RUNSTATUS" -ne 0 ] ; then
+			cat $BASENAME.err
+			echo RETRYING with 32-bit JVM...
+			$RUNCMD32 >> $BASENAME.out 2>> $BASENAME.err &
+			PID=$!
+			sleep 1
+			ps -p $PID
+			RUNSTATUS=$?
+		fi
+		if [ "$RUNSTATUS" -ne 0 ] ; then
+			echo "Couldn't start"
+			cat $BASENAME.err
+			exit
+		fi
+		echo $! > $BASENAME.pid
+		;;
+	stop)
+		if [ ! -r $BASENAME.pid ] ; then
+			echo NOT RUNNING
+			exit
+		fi
+		echo STOPPING $(< $BASENAME.pid)
+		kill $(< $BASENAME.pid)
+		kill -9 $(< $BASENAME.pid) 2> /dev/null
+		mv $BASENAME.pid $BASENAME.pid.last
+		;;
+	restart)
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo $USAGE >&2
+		exit
+		;;
+esac

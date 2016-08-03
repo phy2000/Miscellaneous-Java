@@ -1,0 +1,34 @@
+#!/bin/bash
+# Signal a process with an arbitrary signal and other options to /bin/kill
+#
+	USAGE="$0 <host> <handle> <killoptions>"
+
+	if [ $# -lt 2 ] ; then
+		echo $USAGE
+		exit 1
+	fi
+
+	HOST=$1
+	shift
+	H1=$1
+	shift
+
+	HPID=$(pmclient -h $HOST pid $H1)
+
+	if [ $? -ne 0 ] ; then
+		echo $HPID
+		exit 2
+	fi
+
+	H2=$(pmclient -h $HOST exec /bin/kill $* $HPID)
+
+	if [ $? -ne 0 ] ; then
+		echo $H2
+		exit 3
+	fi
+
+	pmclient -h $HOST wait $H2 > /dev/null
+	pmclient -h $HOST stderr $H2 >&2
+	pmclient -h $HOST stdout $H2
+	pmclient -h $HOST remove $H2
+

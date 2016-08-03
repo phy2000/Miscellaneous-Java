@@ -1,0 +1,81 @@
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>set TOPDIR=.. 
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>set SRCDIR=..\src 
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>cl ..\src\pmserver\PMNative.c /c /Zi /nologo /W3 /WX- /Od /Oy- /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_UNICODE" /D "UNICODE" /EHsc /RTC1 /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fa /Gd /analyze- /errorReport:none  
+PMNative.c
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>link PMNative.obj /OUT:"PMNative.exe" /INCREMENTAL:no /NOLOGO "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /MANIFEST /DEBUG /SUBSYSTEM:CONSOLE /DYNAMICBASE:NO /NXCOMPAT /MACHINE:X86 /ERRORREPORT:NONE  
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>mkdir pmapi pmclient pmutils pmserver 
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>copy ..\bin\pmapi\*.class pmapi 
+..\bin\pmapi\PMProcess.class
+..\bin\pmapi\PMWaitTimer.class
+        2 file(s) copied.
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>copy ..\bin\pmclient\*.class pmclient 
+..\bin\pmclient\PMClientMain.class
+..\bin\pmclient\PMClientSub.class
+..\bin\pmclient\PMTimer.class
+..\bin\pmclient\Usage.class
+        4 file(s) copied.
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>copy ..\bin\pmutils\*.class pmutils 
+..\bin\pmutils\ExecCommand$ExecState.class
+..\bin\pmutils\ExecCommand.class
+..\bin\pmutils\Misc$procState.class
+..\bin\pmutils\Misc.class
+..\bin\pmutils\OsNameArch.class
+..\bin\pmutils\PMDefines.class
+..\bin\pmutils\PMPacket$pktState.class
+..\bin\pmutils\PMPacket.class
+..\bin\pmutils\PMTimerCallback.class
+..\bin\pmutils\PMTimerTask$eTask.class
+..\bin\pmutils\PMTimerTask.class
+..\bin\pmutils\PMTokenizer$tState.class
+..\bin\pmutils\PMTokenizer.class
+..\bin\pmutils\SelectableStream$PipeThread.class
+..\bin\pmutils\SelectableStream.class
+..\bin\pmutils\TFTPServer$1.class
+..\bin\pmutils\TFTPServer$ServerMode.class
+..\bin\pmutils\TFTPServer$TFTPTransfer.class
+..\bin\pmutils\TFTPServer.class
+       19 file(s) copied.
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>copy ..\bin\pmserver\*.class pmserver 
+..\bin\pmserver\eTimerTask.class
+..\bin\pmserver\PMClientd$cState.class
+..\bin\pmserver\PMClientd.class
+..\bin\pmserver\PMProcState.class
+..\bin\pmserver\PMServer.class
+..\bin\pmserver\PMTimerHandler.class
+..\bin\pmserver\Usage.class
+        7 file(s) copied.
+
+C:\work\Product Specialist\eclipse-ws\ProcessManager\build>call ant -file bld-api.xml 
+Buildfile: C:\work\Product Specialist\eclipse-ws\ProcessManager\build\bld-api.xml
+
+create_api_jar:
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+Buildfile: C:\work\Product Specialist\eclipse-ws\ProcessManager\build\bld-client.xml
+
+create_run_jar:
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+Buildfile: C:\work\Product Specialist\eclipse-ws\ProcessManager\build\bld-server.xml
+
+create_run_jar:
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+Buildfile: C:\work\Product Specialist\eclipse-ws\ProcessManager\build\bld-osname.xml
+
+create_run_jar:
+
+BUILD SUCCESSFUL
+Total time: 0 seconds

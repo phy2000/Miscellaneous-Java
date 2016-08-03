@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_api_jar" name="Create Jar for Project ProcMgr API">
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_api_jar">
+        <jar destfile="PMAPI.jar">
+            <manifest>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./"/>
+            </manifest>
+            <fileset dir="." includes="pmclient/*.class"/>
+            <fileset dir="." includes="pmutils/*.class"/>
+            <fileset dir="." includes="pmapi/*.class"/>
+        </jar>
+    </target>
+</project>

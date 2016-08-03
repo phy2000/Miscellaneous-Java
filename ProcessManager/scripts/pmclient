@@ -1,0 +1,18 @@
+#!/bin/bash
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
+_CLIENTDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+if [ -r client.jar ] ; then
+	JARFILE=client.jar
+else
+	JARFILE=$_CLIENTDIR/client.jar
+fi
+
+if [ -r client.log4j.properties ] ; then
+	LOGCONF=client.log4j.properties
+else
+	LOGCONF=$_CLIENTDIR/client.log4j.properties
+fi
+
+java -jar $JARFILE --log4j=$LOGCONF ${1+"$@"}
