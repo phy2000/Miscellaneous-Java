@@ -2,6 +2,7 @@ package pmutils;
 
 public class PMDefines
 {
+	// Update the version in pom.xml when this is updated
   public final static int PM_VERSION = 0x030103;
 	public final static int BUFSIZE = 1024;
 	public final static int BIG_BUFSIZE = (1024*1024);
