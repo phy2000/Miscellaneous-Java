@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="IIS-Demo-Webapp">
+        <wb-resource deploy-path="/" source-path="/target/IIS-Demo-Webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <property name="context-root" value="IIS-Demo-Webapp"/>
+        <property name="java-output-path" value="/IIS-Demo-Webapp/target/classes"/>
+    </wb-module>
+</project-modules>
