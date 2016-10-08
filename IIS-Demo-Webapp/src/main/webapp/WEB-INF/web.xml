@@ -50,8 +50,19 @@
           <param-name>cgiPathPrefix</param-name>
           <param-value>WEB-INF/cgi</param-value>
         </init-param>
+       <init-param>
+          <param-name>executable</param-name>
+          <param-value>perl</param-value>
+        </init-param>
          <load-on-startup>5</load-on-startup>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>cgi</servlet-name>
+        <url-pattern>/cgi-bin/*</url-pattern>
+    </servlet-mapping>
+
+    
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
