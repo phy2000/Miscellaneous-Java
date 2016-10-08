@@ -39,7 +39,6 @@
   <!--                        reading of stderr to complete before          -->
   <!--                        terminating the CGI process. [2000]           -->
 
-<!--
     <servlet>
         <servlet-name>cgi</servlet-name>
         <servlet-class>org.apache.catalina.servlets.CGIServlet</servlet-class>
@@ -53,7 +52,6 @@
         </init-param>
          <load-on-startup>5</load-on-startup>
     </servlet>
--->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

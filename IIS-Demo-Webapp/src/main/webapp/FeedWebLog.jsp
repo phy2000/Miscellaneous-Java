@@ -122,6 +122,13 @@
 	<%
             }
         %>
+<hr>
+<script 
+   src="hello.pl" 
+   type="text/javascript" 
+   language="JavaScript">
+</script>
+
 
 		<div
 			style='mso-element: para-border-div; border: none; border-bottom: solid #4F81BD 1.0pt; mso-border-bottom-themecolor: accent1; padding: 0in 0in 4.0pt 0in'>
