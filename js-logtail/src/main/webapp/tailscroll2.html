@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.7.js"></script>
+<link rel="stylesheet" type="text/css" href="normalize.css">
+<link rel="stylesheet" type="text/css" href="result-light.css">
+
+<style type="text/css">
+#tail {
+	border: 1px solid blue;
+	height: 200px;
+	width: 200px; 
+	overflow: scroll;
+	resize: both;
+}
+</style>
+
+<title>Tail Scroll</title>
+<script type='text/javascript'>
+	//<![CDATA[
+
+	function addText(elId, text) {
+		var obj = document.getElementById(elId);
+		var txt = document.createTextNode(text);
+		obj.appendChild(txt);
+		obj.scrollTop = obj.scrollHeight;
+	}
+
+	$(window).load(function() {
+		// some demo data
+		for (var i = 0; i < 100; i++) {
+			addText("#tail", "log line " + i + "\n");
+		}
+
+		// scroll to bottom on init
+		//tailScroll();
+
+		// add button click
+		$("button").click(function(e) {
+			addText("#tail", "new line of text\n");
+		});
+	});//]]>
+</script>
+
+
+</head>
+
+<body>
+	<textarea id="#tail">first line of text</textarea>
+	<br>
+	<button>Add Line</button>
+</body>
+
+</html>
