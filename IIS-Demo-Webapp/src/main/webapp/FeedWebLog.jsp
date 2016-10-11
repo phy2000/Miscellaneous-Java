@@ -9,17 +9,15 @@
 
 
 		
-<h1>Feed Web Log Records</h1>
+<h1>Feed Web Log Records 2</h1>
 <hr/>
 
-		<%
-			if (request.getParameterNames() != null) {
-		%>
+		<% if (request.getParameter("buttonName") != null) { %>
 		You clicked
 		<%= request.getParameter("buttonName") %>
-		<%
-            }
-        %>
+		<% } else { %>
+		No Click
+		<% } %>
 
 		<table class=MsoTableGrid border=1 
 			style='border-collapse: collapse; border: none; 
@@ -107,68 +105,59 @@
 						<o:p>&nbsp;</o:p>
 					</p>
 					<FORM NAME="Form_SendCustom" METHOD="POST">
-						<INPUT TYPE="HIDDEN" NAME="buttonName"> <INPUT
-							TYPE="BUTTON" VALUE="Send Custom" ONCLICK="Func_SendCustom()">
+						<INPUT TYPE="HIDDEN" NAME="buttonName"> 
+						<INPUT TYPE="BUTTON" VALUE="Send Custom" ONCLICK="Func_SendCustom()">
+						<br>
+						Custom Value: <INPUT TYPE="text" NAME="custom_value"><br>
 					</FORM>
 				</td>
 			</tr>
 		</table>
-	<% 
-            //if(request.getParameter("buttonName") != null) {
-            if(request.getParameterNames() != null) {
-        %>
+	<% if(request.getParameter("buttonName") != null) { %>
 	You clicked
 	<%= request.getParameter("buttonName") %>
-	<%
-            }
-        %>
+	<br>
+	<% if (request.getParameter("custom_value") != null) { %>
+	With Value
+	<%= request.getParameter("custom_value") %>
+	<%	} %>
+    <%  } %>
 <hr>
-<script 
-   src="hello.pl" 
-   type="text/javascript" 
-   language="JavaScript">
-</script>
 
+	<div
+		style='mso-element: para-border-div; border: none; border-bottom: solid #4F81BD 1.0pt; mso-border-bottom-themecolor: accent1; padding: 0in 0in 4.0pt 0in'>
 
-		<div
-			style='mso-element: para-border-div; border: none; border-bottom: solid #4F81BD 1.0pt; mso-border-bottom-themecolor: accent1; padding: 0in 0in 4.0pt 0in'>
+		<p class=MsoTitle>
+			<o:p>&nbsp;</o:p>
+		</p>
 
-			<p class=MsoTitle>
-				<o:p>&nbsp;</o:p>
-			</p>
-
-		</div>
+	</div>
 
 
 
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
-          function Func_SendOne()
-          {
-              document.Form_SendOne.buttonName.value = "Send One"
-            	  Form_SendOne.submit()
-          }    
-          function Func_SendSlow()
-          {
-              document.Form_SendSlow.buttonName.value = "Send Slow"
-            	  Form_SendSlow.submit()
-          }    
-          function Func_SendFast()
-          {
-              document.Form_SendFast.buttonName.value = "Send Fast"
-            	  Form_SendFast.submit()
-          }    
-          function Func_SendVeryFast()
-          {
-              document.Form_SendVeryFast.buttonName.value = "Send Very Fast"
-            	  Form_SendVeryFast.submit()
-          }    
-          function Func_SendCustom()
-          {
-              document.Form_SendCustom.buttonName.value = "Send Custom"
-            	  Form_SendCustom.submit()
-          }    
-     // --> 
+		function Func_SendOne() {
+			document.Form_SendOne.buttonName.value = "Send One"
+			Form_SendOne.submit()
+		}
+		function Func_SendSlow() {
+			document.Form_SendSlow.buttonName.value = "Send Slow"
+			Form_SendSlow.submit()
+		}
+		function Func_SendFast() {
+			document.Form_SendFast.buttonName.value = "Send Fast"
+			Form_SendFast.submit()
+		}
+		function Func_SendVeryFast() {
+			document.Form_SendVeryFast.buttonName.value = "Send Very Fast"
+			Form_SendVeryFast.submit()
+		}
+		function Func_SendCustom() {
+			document.Form_SendCustom.buttonName.value = "Send Custom"
+			Form_SendCustom.submit()
+		}
+	// -->
 	</SCRIPT>
 
 </body>

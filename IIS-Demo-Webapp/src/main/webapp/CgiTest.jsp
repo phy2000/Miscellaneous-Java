@@ -11,12 +11,6 @@
 
 	<h1>Cgi Test</h1>
 	<hr />
-	<script src="/cgi-bin/hello.pl" type="text/javascript" language="JavaScript">
-	</script>
-	<hr />
-	<script src="cgi-bin/hello.pl" type="text/javascript" language="JavaScript">
-	</script>
-	<hr />
 	<a href="hello.pl">hello.pl</a>
 	<hr/>
 	<hr />
