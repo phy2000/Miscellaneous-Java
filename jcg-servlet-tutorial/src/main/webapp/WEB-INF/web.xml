@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <!-- Servlet Demo Mapping -->
+    <servlet>
+        <servlet-name>ServletDemo</servlet-name>
+        <servlet-class>ServletDemo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletDemo</servlet-name>
+        <url-pattern>/ServletDemo</url-pattern>
+    </servlet-mapping>
+    <!-- Servlet Filter Mapping -->
+    <filter>
+        <filter-name>NewFilter</filter-name>
+        <filter-class>NewFilter</filter-class>
+        <init-param>
+            <param-name>newParam</param-name>
+            <param-value>valueOne</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>NewFilter</filter-name>
+		<!--         <url-pattern>/*filter1</url-pattern> -->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- Servlet Session Mapping -->
+    <servlet>
+        <servlet-name>ServletSession</servlet-name>
+        <servlet-class>ServletSession</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletSession</servlet-name>
+        <url-pattern>/ServletSession</url-pattern>
+    </servlet-mapping>
+    <!-- Servlet Error Handler -->
+    <servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>ErrorHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ErrorHandler</servlet-name>
+		<url-pattern>/ErrorHandler</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Error Types -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/ErrorHandler</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/ErrorHandler</location>
+	</error-page>
+	
+	<!-- Debug Demo -->
+    <servlet>
+        <servlet-name>ServletDebugging</servlet-name>
+        <servlet-class>ServletDebugging</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletDebugging</servlet-name>
+        <url-pattern>/ServletDebugging</url-pattern>
+    </servlet-mapping>
+	
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
