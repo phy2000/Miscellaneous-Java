@@ -1,40 +1,36 @@
-#!/usr/bin/perl use strict; 
+#!/usr/bin/perl 
+use strict; 
 use warnings; 
 use CGI; 
-use CGI::Carp qw(fatalsToBrowser warningsToBrowser); 
-#use CGI qw [ -nph :standard ];
-use File::Tail; 
 
+# parameters: fpath, start, endName, textName
 	my $cgi = CGI->new; 
-	my $filepath = $cgi->param("fpath");
-	print $cgi->header, $cgi->start_html;
-	warningsToBrowser(1); 
-	$|++;
-	if ($pid = fork()) {
-	print $cgi->escapeHTML($pid), "<br>";
-		print $cgi->end_html;
-		close(STDOUT);
-		close(STDERR);
-		# exit(0);
-	} else {
-		if (1) {
-			open(my $fh, '<:encoding(UTF-8)', $filepath)
-  			or die "Could not open file '$filepath' $!";
-		 
-			while (my $row = <$fh>) {
- 				chomp $row;
- 				print "\n";
-				print $cgi->escapeHTML($row);
-				print ("<br>");
-				sleep 1;
-		  	}
-	  	} else {
-			my $file = File::Tail->new($filepath); 
-		 
-			while ( my $line = $file->read ) { 
-				print $cgi->escapeHTML($line); 
-				print ("<br>");
-			}
+	my $fpath = $cgi->param("fpath");
+	my $start = $cgi->param("start");
+	my $endName = $cgi->param("endName");
+	my $textName = $cgi->param("textName");
+	my $end = -s $fpath;
+	my $inbuf;
+
+	open(my $fh, '<:encoding(UTF-8)', $fpath)
+		or die "Could not open file '$fpath' $!";
+
+	print $cgi->header;
+
+	if ($start > $end) {
+		$start = 0;
+	}
+		
+	my $length = $end - $start;
+	
+	if ($length != 0) {
+		if ($start != 0) {
+			seek($fh, $start, 0);
 		}
- 	} 
-	print $cgi->end_html;
+		read ($fh, $inbuf, $length);
+		$inbuf =~ s/\r//g;
+		$inbuf =~ s/\n/\\n/g;
+		print "$textName=\"$inbuf\";\n";
+	}
+	print ("$endName=$end;\n");
+	

@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
 
 <style type="text/css">
-#tail {
+tail {
 	border: 1px solid blue;
 	height: 200px;
 	width: 200px; 
@@ -16,7 +16,7 @@
 	resize: both;
 }
 
-iframe {
+myframe {
 	border: 1px solid blue;
 	height: 200px;
 	width: 200px; 
@@ -33,13 +33,20 @@ iframe {
 		var obj = document.getElementById(elId);
 		var txt = document.createTextNode(text);
 		obj.appendChild(txt);
+		
 		obj.scrollTop = obj.scrollHeight;
+	}
+	
+	function callTail(elId) {
+		var obj = document.getElementById(elId);
+		obj.innerHTML = '<iframe id="myframe" src="./cgi-bin/tail.cgi?fpath=c:/temp/tail.test"></iframe>';
+
 	}
 
 	$(window).load(function() {
 		// some demo data
-		for (var i = 0; i < 100; i++) {
-			addText("#tail", "log line " + i + "\n");
+		for (var i = 0; i < 10; i++) {
+			addText("tail", "log line " + i + "\n");
 		}
 
 		// scroll to bottom on init
@@ -47,7 +54,8 @@ iframe {
 
 		// add button click
 		$("button").click(function(e) {
-			addText("#tail", "new line of text\n");
+			addText("tail", "new line of text\n");
+			callTail("tailstuff");
 		});
 	});//]]>
 </script>
@@ -56,12 +64,14 @@ iframe {
 </head>
 
 <body>
-	<textarea id="#tail">first line of text</textarea>
+	<textarea id="tail">first line of text</textarea>
 	<br>
 	<button>Add Line</button>
 	<hr>
-	<div>
-	<iframe src=./cgi-bin/tail.cgi?fpath=c:/temp/tail.test></iframe>
+	<div id="tailstuff">
+	<a href="./cgi-bin/tail.cgi?fpath=c:/temp/tail.test"> test tail.cgi </a>
 	</div>
+	<hr>
+	<a href="./cgi-bin/tail.cgi?fpath=c:/temp/tail.test"> test tail.cgi </a>
 </body>
 
