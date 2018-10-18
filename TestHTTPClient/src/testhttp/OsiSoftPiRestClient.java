@@ -44,25 +44,23 @@ import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 
 
-
-public class KafkaRestConsumer {
+public class OsiSoftPiRestClient {
 	static final String strBaseUrl = "http://quickstart:8082";
 	static Logger logger;
 	static String _progname;
-	static KafkaConsumerConfig mConfig = null;
+	static OsiSoftPiConfig mConfig = null;
 
 	private static void init_main(String[] args) throws Exception {
-		mConfig = new KafkaConsumerConfig();
-		_progname = KafkaRestConsumer.class.getName();
+		mConfig = new OsiSoftPiConfig();
+		_progname = OsiSoftPiRestClient.class.getName();
 		logger = Logger.getLogger(_progname);
 		int argId;
 		LongOpt[] longopts = { new LongOpt("url", LongOpt.REQUIRED_ARGUMENT, null, 'u'),
 				new LongOpt("topic", LongOpt.REQUIRED_ARGUMENT, null, 't'),
 				new LongOpt("consumer", LongOpt.REQUIRED_ARGUMENT, null, 'c'),
-				new LongOpt("timeout", LongOpt.REQUIRED_ARGUMENT, null, 'T'), 
 				new LongOpt("verbose", LongOpt.NO_ARGUMENT, null, 'v'),
-				};
-		Getopt g = new Getopt(_progname, args, "+:u:t:c:T:v", longopts);
+				new LongOpt("timeout", LongOpt.REQUIRED_ARGUMENT, null, 'T'), };
+		Getopt g = new Getopt(_progname, args, "+:u:t:c:v", longopts);
 		g.setOpterr(false); // We'll do our own error handling
 
 		while ((argId = g.getopt()) != -1) {
@@ -110,13 +108,13 @@ public class KafkaRestConsumer {
 		String strJson;
 
 		init_main(args);
+		// Create a consumer
 
-		CloseableHttpClient httpclient = HttpUtil.createClient(mConfig.m_timeoutSeconds);
+		CloseableHttpClient httpclient = HttpUtil.createClient(10);
 //		curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" \
 //	      --data '{"name": "my_consumer_instance", "format": "json", "auto.offset.reset": "earliest"}' \
 //	      http://quickstart:8082/consumers/my_json_consumer
 //	    	  
-		// Create a consumer
 		strDestination = mConfig.url + "/consumers/" + mConfig.consumerName ;
 		strJson = String.format("{\"name\":\"%s_instance\",\"format\":\"json\",\"auto.offset.reset\":\"earliest\"}", mConfig.consumerName);
 		headers.clear();
@@ -134,8 +132,7 @@ public class KafkaRestConsumer {
 
 		strDestination = mConfig.url
 				+ "/consumers/httpclient_consumer/instances/httpclient_consumer_instance/subscription";
-		
-		strJson = String.format("{\"topics\":[\"%s\"]}", mConfig.url);
+		strJson = "{\"topics\":[\"jsontest\"]}";
 		headers.clear();
 		headers.add(new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/vnd.kafka.v2+json"));
 		response = HttpUtil.sendRequest("post", strDestination, null, headers, strJson, httpclient);
@@ -167,23 +164,23 @@ public class KafkaRestConsumer {
 			response = null;
 		}
 	}
-	static class KafkaConsumerConfig {
-		String url = "http://localhost:8082";
-		String topicName = null;
-		String consumerName = "httpclient_consumer";
-		boolean verbose = false;
-		int m_timeoutSeconds = 5;
-
-		static void print(String progname) {
-			System.err.printf(String.format(Usage.message, progname, progname, progname));
-			System.exit(1);
-		}
-	}
 	static class Usage {
 		final static String message = "Usage: %s -u|--url=<url> -t|--topic=<topic> [-c|--consumer=<name>] [-t|--timeout=<seconds>] [-v|--verbose]\n";
 
 		static void print(String progname) {
 			System.err.printf(String.format(Usage.message, progname));
+			System.exit(1);
+		}
+	}
+	static class OsiSoftPiConfig {
+		String url = "http://localhost:8082";
+		String topicName = null;
+		String consumerName = "pi_consumer";
+		boolean verbose = false;
+		int m_timeoutSeconds = 5;
+
+		static void print(String progname) {
+			System.err.printf(String.format(Usage.message, progname, progname, progname));
 			System.exit(1);
 		}
 	}

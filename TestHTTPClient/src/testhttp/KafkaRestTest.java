@@ -37,7 +37,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 
 public class KafkaRestTest {
-	static final String strBaseUrl = "http://quickstart:8082";
+	static final String strBaseUrl = "http://centos7:8082";
 
 	public static void main(String[] args) throws Exception {
 		CloseableHttpResponse response = null;
@@ -56,7 +56,7 @@ public class KafkaRestTest {
 		headers.clear();
 		headers.add(new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/vnd.kafka.json.v2+json"));
 		headers.add(new BasicHeader(HttpHeaders.ACCEPT, "application/vnd.kafka.v2+json"));
-		response = HttpUtil.sendRequest("post", strDestination, null, headers, strJson);
+		response = HttpUtil.sendRequest("post", strDestination, headers, strJson);
 		if (response != null) {
 			HttpUtil.printResponse(response);
 			response.close();
@@ -73,7 +73,7 @@ public class KafkaRestTest {
 		strJson = "{\"name\":\"httpclient_consumer_instance\",\"format\":\"json\",\"auto.offset.reset\":\"earliest\"}";
 		headers.clear();
 		headers.add(new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/vnd.kafka.v2+json"));
-		response = HttpUtil.sendRequest("post", strDestination, null, headers, strJson);
+		response = HttpUtil.sendRequest("post", strDestination, headers, strJson);
 		if (response != null) {
 			HttpUtil.printResponse(response);
 			response.close();
@@ -88,7 +88,7 @@ public class KafkaRestTest {
 		strJson = "{\"topics\":[\"jsontest\"]}";
 		headers.clear();
 		headers.add(new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/vnd.kafka.v2+json"));
-		response = HttpUtil.sendRequest("post", strDestination, null, headers, strJson);
+		response = HttpUtil.sendRequest("post", strDestination, headers, strJson);
 		if (response != null) {
 			HttpUtil.printResponse(response);
 			response.close();
@@ -101,7 +101,7 @@ public class KafkaRestTest {
 		strDestination = strBaseUrl + "/consumers/httpclient_consumer/instances/httpclient_consumer_instance/records";
 		headers.clear();
 		headers.add(new BasicHeader(HttpHeaders.ACCEPT, "application/vnd.kafka.json.v2+json"));
-		response = HttpUtil.sendRequest("get", strDestination, null, headers, null);
+		response = HttpUtil.sendRequest("get", strDestination, headers, null);
 		if (response != null) {
 			HttpUtil.printResponse(response);
 			response.close();
