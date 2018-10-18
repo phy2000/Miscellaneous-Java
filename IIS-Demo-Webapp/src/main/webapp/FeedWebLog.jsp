@@ -9,17 +9,15 @@
 
 
 		
-<h1>Feed Web Log Records</h1>
-<hr/>
+<h1>Feed Web Log Records 2</h1>
+<hr></hr>
 
-		<%
-			if (request.getParameterNames() != null) {
-		%>
+		<% if (request.getParameter("buttonName") != null) { %>
 		You clicked
 		<%= request.getParameter("buttonName") %>
-		<%
-            }
-        %>
+		<% } else { %>
+		No Click
+		<% } %>
 
 		<table class=MsoTableGrid border=1 
 			style='border-collapse: collapse; border: none; 
@@ -34,7 +32,7 @@
 					style='width: 211.7pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0in 5.4pt 0in 5.4pt; height: 57.1pt'>
 					<p class=MsoNormal
 						style='margin-bottom: 0in; margin-bottom: .0001pt; line-height: normal'>
-						<o:p>&nbsp;</o:p>
+						&nbsp;
 					</p> 
 					<FORM NAME="Form_SendOne" METHOD="POST">
 						<INPUT TYPE="HIDDEN" NAME="buttonName"></INPUT> <INPUT
@@ -52,11 +50,11 @@
 					style='width: 211.7pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0in 5.4pt 0in 5.4pt; height: 57.1pt'>
 					<p class=MsoNormal
 						style='margin-bottom: 0in; margin-bottom: .0001pt; line-height: normal'>
-						<o:p>&nbsp;</o:p>
+						&nbsp;
 					</p>
 					<FORM NAME="Form_SendSlow" METHOD="POST">
-						<INPUT TYPE="HIDDEN" NAME="buttonName"> 
-						<INPUT TYPE="BUTTON" VALUE="Send Slow" ONCLICK="Func_SendSlow()">
+						<INPUT TYPE="HIDDEN" NAME="buttonName"></INPUT> 
+						<INPUT TYPE="BUTTON" VALUE="Send Slow" ONCLICK="Func_SendSlow()"></INPUT>
 					</FORM>
 				</td>
 			</tr>
@@ -69,11 +67,12 @@
 					style='width: 211.7pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0in 5.4pt 0in 5.4pt; height: 57.1pt'>
 					<p class=MsoNormal
 						style='margin-bottom: 0in; margin-bottom: .0001pt; line-height: normal'>
-						<o:p>&nbsp;</o:p>
+						&nbsp;
 					</p>
 					<FORM NAME="Form_SendFast" METHOD="POST">
-						<INPUT TYPE="HIDDEN" NAME="buttonName"> <INPUT
-							TYPE="BUTTON" VALUE="Send Fast" ONCLICK="Func_SendFast()">
+						<INPUT TYPE="HIDDEN" NAME="buttonName"></INPUT> 
+						<INPUT
+							TYPE="BUTTON" VALUE="Send Fast" ONCLICK="Func_SendFast()"></INPUT>
 					</FORM>
 				</td>
 			</tr>
@@ -86,11 +85,12 @@
 					style='width: 211.7pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0in 5.4pt 0in 5.4pt; height: 57.1pt'>
 					<p class=MsoNormal
 						style='margin-bottom: 0in; margin-bottom: .0001pt; line-height: normal'>
-						<o:p>&nbsp;</o:p>
+						&nbsp;
 					</p>
 					<FORM NAME="Form_SendVeryFast" METHOD="POST">
-						<INPUT TYPE="HIDDEN" NAME="buttonName"> <INPUT
-							TYPE="BUTTON" VALUE="Send Very Fast" ONCLICK="Func_SendVeryFast()">
+						<INPUT TYPE="HIDDEN" NAME="buttonName"></INPUT>
+						 <INPUT
+							TYPE="BUTTON" VALUE="Send Very Fast" ONCLICK="Func_SendVeryFast()"></INPUT>
 					</FORM>
 				</td>
 			</tr>
@@ -104,64 +104,62 @@
 					style='width: 211.7pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0in 5.4pt 0in 5.4pt; height: 57.1pt'>
 					<p class=MsoNormal
 						style='margin-bottom: 0in; margin-bottom: .0001pt; line-height: normal'>
-						<o:p>&nbsp;</o:p>
+						&nbsp;
 					</p>
 					<FORM NAME="Form_SendCustom" METHOD="POST">
-						<INPUT TYPE="HIDDEN" NAME="buttonName"> <INPUT
-							TYPE="BUTTON" VALUE="Send Custom" ONCLICK="Func_SendCustom()">
+						<INPUT TYPE="HIDDEN" NAME="buttonName"></INPUT>
+						<INPUT TYPE="BUTTON" VALUE="Send Custom" ONCLICK="Func_SendCustom()"></INPUT>
+						<br></br>
+						Custom Value: <INPUT TYPE="text" NAME="custom_value" ></INPUT><br></br>
 					</FORM>
 				</td>
 			</tr>
 		</table>
-	<% 
-            //if(request.getParameter("buttonName") != null) {
-            if(request.getParameterNames() != null) {
-        %>
+	<% if(request.getParameter("buttonName") != null) { %>
 	You clicked
 	<%= request.getParameter("buttonName") %>
-	<%
-            }
-        %>
+	<br></br>
+	<% if (request.getParameter("custom_value") != null) { %>
+	With Value
+	<%= request.getParameter("custom_value") %>
+	<%	} %>
+    <%  } %>
+<hr></hr>
 
-		<div
-			style='mso-element: para-border-div; border: none; border-bottom: solid #4F81BD 1.0pt; mso-border-bottom-themecolor: accent1; padding: 0in 0in 4.0pt 0in'>
+	<div
+		style='mso-element: para-border-div; border: none; border-bottom: solid #4F81BD 1.0pt; mso-border-bottom-themecolor: accent1; padding: 0in 0in 4.0pt 0in'>
 
-			<p class=MsoTitle>
-				<o:p>&nbsp;</o:p>
-			</p>
+		<p class=MsoTitle>
+			&nbsp;
+		</p>
 
-		</div>
+	</div>
 
 
 
-	<SCRIPT LANGUAGE="JavaScript">
+	<SCRIPT type="text/javascript">
 	<!--
-          function Func_SendOne()
-          {
-              document.Form_SendOne.buttonName.value = "Send One"
-            	  Form_SendOne.submit()
-          }    
-          function Func_SendSlow()
-          {
-              document.Form_SendSlow.buttonName.value = "Send Slow"
-            	  Form_SendSlow.submit()
-          }    
-          function Func_SendFast()
-          {
-              document.Form_SendFast.buttonName.value = "Send Fast"
-            	  Form_SendFast.submit()
-          }    
-          function Func_SendVeryFast()
-          {
-              document.Form_SendVeryFast.buttonName.value = "Send Very Fast"
-            	  Form_SendVeryFast.submit()
-          }    
-          function Func_SendCustom()
-          {
-              document.Form_SendCustom.buttonName.value = "Send Custom"
-            	  Form_SendCustom.submit()
-          }    
-     // --> 
+		function Func_SendOne() {
+			document.Form_SendOne.buttonName.value = "Send One"
+			Form_SendOne.submit()
+		}
+		function Func_SendSlow() {
+			document.Form_SendSlow.buttonName.value = "Send Slow"
+			Form_SendSlow.submit()
+		}
+		function Func_SendFast() {
+			document.Form_SendFast.buttonName.value = "Send Fast"
+			Form_SendFast.submit()
+		}
+		function Func_SendVeryFast() {
+			document.Form_SendVeryFast.buttonName.value = "Send Very Fast"
+			Form_SendVeryFast.submit()
+		}
+		function Func_SendCustom() {
+			document.Form_SendCustom.buttonName.value = "Send Custom"
+			Form_SendCustom.submit()
+		}
+	// -->
 	</SCRIPT>
 
 </body>

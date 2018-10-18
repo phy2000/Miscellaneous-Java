@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+
+<style type="text/css">
+tail {
+	border: 1px solid blue;
+	height: 200px;
+	width: 200px; 
+	overflow: scroll;
+	resize: both;
+}
+
+myframe {
+	border: 1px solid blue;
+	height: 200px;
+	width: 200px; 
+	resize: both;
+}
+
+</style>
+
+<title>Tail Scroll</title>
+<script type='text/javascript'>
+	//<![CDATA[
+
+	function addText(elId, text) {
+		var obj = document.getElementById(elId);
+		var txt = document.createTextNode(text);
+		obj.appendChild(txt);
+		
+		obj.scrollTop = obj.scrollHeight;
+	}
+	
+	function callTail(elId) {
+		var obj = document.getElementById(elId);
+		obj.innerHTML = '<iframe id="myframe" src="./cgi-bin/tail.cgi?fpath=c:/temp/tail.test"></iframe>';
+
+	}
+
+	$(window).load(function() {
+		// some demo data
+		for (var i = 0; i < 10; i++) {
+			addText("tail", "log line " + i + "\n");
+		}
+
+		// scroll to bottom on init
+		//tailScroll();
+
+		// add button click
+		$("button").click(function(e) {
+			addText("tail", "new line of text\n");
+			callTail("tailstuff");
+		});
+	});//]]>
+</script>
+
+
+</head>
+
+<body>
+	<textarea id="tail">first line of text</textarea>
+	<br>
+	<button>Add Line</button>
+	<hr>
+	<div id="tailstuff">
+	<a href="./cgi-bin/tail.cgi?fpath=c:/temp/tail.test"> test tail.cgi </a>
+	</div>
+	<hr>
+	<a href="./cgi-bin/tail.cgi?fpath=c:/temp/tail.test"> test tail.cgi </a>
+</body>
+

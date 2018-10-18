@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+
+<style type="text/css">
+
+#tail {    
+	border: 2px solid blue;
+//	height: 50%;
+	//width: 300px; 
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
+    padding:10px ;
+    margin: 10px 0.1% 10px 0.1%;
+    overflow: scroll;
+	resize: both;
+}
+</style>
+
+<title>Test Tail Function - using CGI script</title>
+
+<script type='text/javascript'>
+//<![CDATA[
+
+           
+	var timerId = -1;
+	var timeCount = 0;
+	var textname="tail";
+	var textBuf = "";
+	var endByte=0;
+	var startByte=0;
+	var fpath = "c:/temp/tail.test";
+	function addText(elId, text) {
+		var obj = document.getElementById(elId);
+		var txt = document.createTextNode(text);
+		obj.appendChild(txt);
+
+		obj.scrollTop = obj.scrollHeight;
+	}
+
+	function toggleTimer() {
+		if (timerId == -1) {
+			// Turn timer on
+			//timeCount++;
+			addText(textname, "\nTimer On");
+			timerId = setInterval(runScript, 2000);
+		} else {
+			// Turn timer off
+			clearInterval(timerId);
+			addText(textname, "\nTimer Off");
+			timerId = -1;
+		}
+	}
+
+	function runScript() {
+		  script = document.createElement('script');  // Create an element 
+		  script.src = './cgi-bin/tail.cgi?fpath=' + fpath +'&start=' + startByte +'&endName=startByte&textName=textBuf';
+		  script.type = "text/javascript";
+		  // Now add the script element in the head section which automatically updates the value
+		  document.getElementsByTagName('head')[0].appendChild(script);
+		  // Now get rid of the element so as not to create multiple iterations  
+		  document.getElementsByTagName('head')[0].removeChild(script);
+		  if (textBuf != "") {
+		  	addText(textname, textBuf);
+		  }
+		  textBuf = "";
+		  //startByte = endByte;
+		  console.log("startByte = " + startByte);
+		  //console.log("endByte = " + endByte);
+	}
+
+	$(window).load(function() {
+		// some demo data
+		for (var i = 0; i < 10; i++) {
+			addText(textname, "\nlog line " + i);
+		}
+
+		// add button click
+		$("button").click(function(e) {
+			toggleTimer();
+		});
+	});//]]>
+</script>
+
+
+</head>
+
+<body>
+<div>
+	<textarea readonly id="tail" rows="10" cols="25">
+TEXT AREA</textarea>
+</div>
+
+	<div>
+	<button style="margin: 10px 0.5% 10px 0.5%">Toggle Timer</button>
+	</div>
+</body>
+

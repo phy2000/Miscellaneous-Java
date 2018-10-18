@@ -1,38 +1,14 @@
-<HTML>
-    <HEAD>
-        <TITLE>Using Buttons</TITLE>
-    </HEAD>
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <html>
+    <head>
+        <title>Links</title>
+    </head>
 
-    <BODY>
-        <% 
-            //if(request.getParameter("buttonName") != null) {
-            if(request.getParameterNames() != null) {
-        %>
-            You clicked 
-            <%= request.getParameter("buttonName") %>
-        <%
-            }
-        %>
-
-        <FORM NAME="formblah" METHOD="POST">
-            <INPUT TYPE="HIDDEN" NAME="buttonName">
-            <INPUT TYPE="BUTTON" VALUE="Button 1" ONCLICK="button1()">
-            <INPUT TYPE="BUTTON" VALUE="Button 2" ONCLICK="button2()">
-        </FORM>
-
-        <SCRIPT LANGUAGE="JavaScript">
-            <!--
-            function button1()
-            {
-                document.formblah.buttonName.value = "button blah"
-                	formblah.submit()
-            }    
-            function button2()
-            {
-                document.formblah.buttonName.value = "button blah blah"
-                	formblah.submit()
-            }    
-            // --> 
-        </SCRIPT>
-    </BODY>
-</HTML>
+    <body>
+    <br></br>
+        <h2><a href="FeedWebLog.jsp">FeedWebLog.jsp</a><br></br></h2>
+        <h2><a href="CgiTest.html">CgiTest.html</a><br></br></h2>
+    </body>
+</html>

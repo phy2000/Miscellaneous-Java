@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="normalize.css">
+<link rel="stylesheet" type="text/css" href="result-light.css">
+
+<style type="text/css">
+#tail {
+	border: 1px solid blue;
+	height: 500px;
+	width: 500px;
+	overflow: hidden;
+}
+</style>
+
+<title>Tail Scroll</title>
+<script type='text/javascript'>
+	//<![CDATA[
+	$(window).load(function() {
+		// some demo data
+		for (var i = 0; i < 100; i++) {
+			$("<div />").text("log line " + i).appendTo("#tail")
+		}
+
+		// scroll to bottom on init
+		tailScroll();
+
+		// add button click
+		$("button").click(function(e) {
+			e.preventDefault();
+			$("<div />").text("new line").appendTo("#tail");
+			tailScroll();
+		});
+
+		//tail effect
+		function tailScroll() {
+			var height = $("#tail").get(0).scrollHeight;
+			$("#tail").animate({
+				scrollTop : height
+			}, 500);
+		}
+	});//]]>
+</script>
+
+
+</head>
+
+<body>
+	<div id="#tail">
+		<div>some line of text</div>
+	</div>
+
+	<button>Add Line</button>
+
+</body>
+
+</html>
